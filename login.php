@@ -1,3 +1,32 @@
+<?php
+    session_start();
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $users = file_get_contents(__DIR__ . '/users.json');
+        $users = json_decode($users, 1);
+        $_SESSION['error'] = '';
+        foreach($users as $user) {
+            if ($user['email'] == $_POST['email'] && $user['psw'] == md5($_POST['psw'])) {
+                $_SESSION['email'] = $user['email'];
+                header('Location: http://localhost:8888/phpbank01/list.php');
+                die;
+            }
+        }
+        $_SESSION['error'] = 'Invalid password or user name';
+        header('Location: http://localhost:8888/phpbank01/login.php');
+        die;
+    }
+
+    if (isset($_SESSION['error'])) {
+        $error = $_SESSION['error'];
+        unset($_SESSION['error']);
+    }
+    else {
+        $error = '';
+    }
+    
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +44,11 @@
             </div>
             <div class="main-form">
                 <form action="login.php" method="post" class="login-form">
-                    <h1 class="main-header">Welcome back</h1>
+                    <h1 class="main-h">Welcome back</h1>
                     <p class="info">Enter your credentials to access your account.</p>
+                    <?php if ($error) :?>
+                        <p class="error"><?= $error ?></p>
+                    <?php endif?>    
                     <div class="input">
                         <img src="./img/email.svg" alt="email-icon">
                         <input type="email" name="email" id="email" placeholder="Enter your email" required>
