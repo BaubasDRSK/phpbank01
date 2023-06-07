@@ -1,6 +1,10 @@
 <?php
 session_start();
+$exit = $_GET['exit'] ?? "";
+if ($exit) {
 $_SESSION = [];
+}
+
 $userid = $_SESSION['email'] ?? 0;
 
 if ($userid){

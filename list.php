@@ -1,3 +1,16 @@
+<?php
+    session_start();
+    if (!isset( $_SESSION['email'])){
+        header('Location: http://localhost:8888/phpbank01/login.php');
+        die;
+    }
+
+    $accounts = file_get_contents(__DIR__ . '/accounts.json');
+    $accounts = $accounts ? json_decode($accounts, 1) : [];
+    usort($accounts, function($a, $b) {
+        return strcmp($a['lname'], $b['lname']);
+    });
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,19 +21,37 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-wrapp">
-            <div class="header-logo">
-                <a href="index.php" class="logo-link"><img src="./img/logo.webp" alt="logo"></a>
-            </div>
-            <nav class="main-nav">
-                <a href="addnew.php">Add new account</a>
-                <a href="index.php">Logout</a>
-            </nav>
+    <?php include 'header.php'; ?>
+    <main class="main-content list">
+        <div class="main-content-wrapp">         
+            <ul class="list-header">
+                <li class="user-item">
+                            <p>First Name</p>
+                            <p>Last Name</p>
+                            <p>Personal ID</p>
+                            <p>IBAN</p>
+                            <p>Balance</p>
+                            <p>Actions</p>
+                </li>
+            </ul>   
+            <ul class="user-list">
+                <?php foreach ($accounts as $a) :?>
+                    <?php 
+                        $balance = $a['balance'] / 100;
+                        $regex = "/(\d)(?=(\d{3})+(?!\d))/";
+                        $balance = preg_replace($regex, ",", $balance)." €";
+                    ?>
+                    <li class="user-item">
+                        <p><?= $a['fname']?></p>
+                        <p><?= $a['lname']?></p>
+                        <p><?= $a['pid']?></p>
+                        <p><?= $a['iban']?></p>
+                        <p><?= $balance?></p>
+                        <p>EDIT / DELETE</p>
+                    </li>
+                <?php endforeach ?>
+            </ul>
         </div>
-    </header>
-    <main class="main-content">
-    
     </main>
 </body>
 </html>
