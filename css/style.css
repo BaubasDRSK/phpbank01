@@ -133,6 +133,7 @@ h1 {
     color:#fff;
     font-weight: bold;
     border: none;
+    text-decoration: none;
 }
 
 .main-form .btn-blue:hover {
@@ -143,21 +144,51 @@ h1 {
     color: red;
 }
 
+.btn-red{
+    width:100%;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #ff2e2e;
+    color:#fff;
+    font-weight: bold;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-red:hover{
+    background-color: #8a1414;
+}
+
+.btn-green{
+    width:100%;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #48920b;
+    color:#fff;
+    font-weight: bold;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-green:hover{
+    background-color: #095f24;
+}
 /* LISTAS */
 
 .user-item {
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr 2fr 1fr 1fr;
+    grid-template-columns:1fr 1fr 1fr 2fr 2fr 1fr 1fr;
     grid-gap: 20px; 
     padding: 30px 50px;
 }
 
 .user-list {
     width:100%;
-    min-width: 1200;
+    min-width: 1200px;
     background-color: #fff;
     max-height: 700px;
     overflow-y: scroll;
+    color:#355985;
 }
 
 .list-header{
@@ -173,4 +204,31 @@ h1 {
 .user-item p {
     text-align: center;
     min-width: 100px;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+a.acction{
+    text-decoration: none;
+    color:#355985;
+}
+
+a.acctionL:visited{
+    text-decoration: none;
+    color:#355985;
+}
+
+a.acction:hover{
+    text-decoration: underline;
+    color:#173a69;
 }

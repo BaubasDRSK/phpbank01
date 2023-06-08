@@ -4,11 +4,11 @@
         header('Location: http://localhost:8888/phpbank01/login.php');
         die;
     }
-
+    $sorter = "lname";
     $accounts = file_get_contents(__DIR__ . '/accounts.json');
     $accounts = $accounts ? json_decode($accounts, 1) : [];
-    usort($accounts, function($a, $b) {
-        return strcmp($a['lname'], $b['lname']);
+    usort($accounts, function($a, $b) use($sorter){
+        return strcmp($a[$sorter], $b[$sorter]);
     });
 ?>
 <!DOCTYPE html>
@@ -26,6 +26,7 @@
         <div class="main-content-wrapp">         
             <ul class="list-header">
                 <li class="user-item">
+                            <p>ID</p>
                             <p>First Name</p>
                             <p>Last Name</p>
                             <p>Personal ID</p>
@@ -38,16 +39,17 @@
                 <?php foreach ($accounts as $a) :?>
                     <?php 
                         $balance = $a['balance'] / 100;
-                        $regex = "/(\d)(?=(\d{3})+(?!\d))/";
+                        $regex = "/(\d)(?=(\d{8})+(?!\d))/";
                         $balance = preg_replace($regex, ",", $balance)." €";
                     ?>
                     <li class="user-item">
+                        <p><?= $a['id']?></p>
                         <p><?= $a['fname']?></p>
                         <p><?= $a['lname']?></p>
                         <p><?= $a['pid']?></p>
                         <p><?= $a['iban']?></p>
                         <p><?= $balance?></p>
-                        <p>EDIT / DELETE</p>
+                        <p><a href=<?= "edit.php?id=".$a['id']?> class="acction"><span style="color:green;">+</span> € <span style="color:red;">-</span></a> / <a href=<?= "delete.php?id=".$a['id']?> class="acction">DELETE</a></p>
                     </li>
                 <?php endforeach ?>
             </ul>

@@ -11,7 +11,6 @@ $pids = [];
 
 foreach ($accounts as $acc){
     $pids[] = $acc['pid'];
-    echo $acc['pid'];
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -48,8 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $accounts = file_get_contents(__DIR__ . '/../accounts.json');
     $accounts = $accounts ? json_decode($accounts, 1) : [];
-    echo "<pre>";
-    print_r($_POST);
+   
     
     $accounts[] = [
         'id' => $_POST['id'],
