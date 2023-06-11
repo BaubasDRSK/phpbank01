@@ -8,7 +8,7 @@ body{
 }
 .main-header{
     width:100vw;
-    min-height: 60px;
+    min-height: 105px;
     background-color:#fff;
     box-shadow:1px 1px 5px #ccc;
     padding: 15px 0;
@@ -30,7 +30,7 @@ body{
 
 .main-nav a{
     text-decoration: none;
-    color:#B7B9BC;
+    color:#6d6d6e;
     text-transform: uppercase;
 }
 
@@ -42,7 +42,7 @@ body{
     margin: 0 auto;
     max-width: 1200px;
     width:100vw;
-    min-height:750px;
+    min-height:calc(100vh - 105px);
     display:flex;
     justify-content: center;
     align-items: center;
@@ -86,9 +86,15 @@ h1 {
 }
 
 .info {
-    color: #B7B9BC;
+    color: #949494;
     font-size: 17px;
-    font-weight: 300;
+    font-weight: 400;
+}
+
+.info.note {
+    color: red;
+    font-size: 17px;
+    font-weight: 400;
 }
 
 
@@ -109,7 +115,7 @@ h1 {
 
 .input input::placeholder {
     opacity: 1;
-    color: #D5DFE5;
+    color: #939ca1;
 }
 .input input:focus{
     outline: none;
@@ -186,7 +192,7 @@ h1 {
     width:100%;
     min-width: 1200px;
     background-color: #fff;
-    max-height: 700px;
+    max-height:calc(100vh - 300px);
     overflow-y: scroll;
     color:#355985;
 }
@@ -216,6 +222,7 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+  appearance: none;
 }
 
 a.acction{
@@ -229,6 +236,13 @@ a.acctionL:visited{
 }
 
 a.acction:hover{
-    text-decoration: underline;
+    /* text-decoration: underline; */
     color:#173a69;
+}
+
+.user-item p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }

@@ -60,9 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Location: ../'.$rp.'?id='.$_POST['minus']);
     die;
     }
-
-    echo "<pre>";
-    print_r($_POST);
     
 } else {
     header('Location: ../list.php');

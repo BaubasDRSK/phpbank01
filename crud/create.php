@@ -22,6 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
 
+    //checking for errors
+
     if (!preg_match('/^[A-Z,Ą,Č,Ę,Ė,Į,Š,Ų,Ū,Ž][a-z,ą,č,ę,ė,į,š,ų,ū,ž]{2,}$/', $_POST['fname'])){
         $error1 = 1;
     }
@@ -42,13 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: ../addnew.php?e1=$error1&e2=$error2&e3=$error3&e4=$error4&fname=$fname&lname=$lname");
         die;
     }
-
-
-
-    $accounts = file_get_contents(__DIR__ . '/../accounts.json');
-    $accounts = $accounts ? json_decode($accounts, 1) : [];
-   
     
+    //adding new account
     $accounts[] = [
         'id' => $_POST['id'],
         'fname' => $_POST['fname'],
@@ -57,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'iban' => $_POST['iban'],
         'balance' => 0,
     ];
+
     $accounts = json_encode($accounts);
     file_put_contents(__DIR__ . '/../accounts.json', $accounts);
     header('Location: ../list.php');

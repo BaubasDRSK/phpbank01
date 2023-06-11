@@ -4,12 +4,25 @@
         header('Location: http://localhost:8888/phpbank01/login.php');
         die;
     }
-    $sorter = "lname";
+    $sorter = $_GET['sort'] ?? "id";
+    $sortdir = $_GET['dir'] ?? "0";
+
+    
     $accounts = file_get_contents(__DIR__ . '/accounts.json');
     $accounts = $accounts ? json_decode($accounts, 1) : [];
-    usort($accounts, function($a, $b) use($sorter){
-        return strcmp($a[$sorter], $b[$sorter]);
-    });
+    
+    if ($sortdir == 1){
+        usort($accounts, function($a, $b) use($sorter){
+            return strnatcmp($a[$sorter], $b[$sorter]);
+        });
+    }
+
+    if ($sortdir == 2){
+        usort($accounts, function($b, $a) use($sorter){
+            return strnatcmp($a[$sorter], $b[$sorter]);
+        });
+    }
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,12 +39,160 @@
         <div class="main-content-wrapp">         
             <ul class="list-header">
                 <li class="user-item">
-                            <p>ID</p>
-                            <p>First Name</p>
-                            <p>Last Name</p>
-                            <p>Personal ID</p>
-                            <p>IBAN</p>
-                            <p>Balance</p>
+                            <p>ID 
+                                <?php if($sorter != 'id') : ?>
+                                    <a href=<?= "list.php?sort=id&dir=1"?> class="acction">
+                                        <img src="./img/no-sort.svg" alt="money" width="20px">
+                                    </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'id' && $sortdir == 0 ) : ?>
+                                        <a href=<?= "list.php?sort=id&dir=1"?> class="acction">
+                                            <img src="./img/no-sort.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'id' && $sortdir == 1 ) : ?>
+                                        <a href=<?= "list.php?sort=id&dir=2"?> class="acction">
+                                            <img src="./img/sort-down.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'id' && $sortdir == 2 ) : ?>
+                                        <a href=<?= "list.php?sort=id&dir=0"?> class="acction">
+                                            <img src="./img/sort-up.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+                                
+                            </p>
+                            <p>First Name
+                                <?php if($sorter != 'fname') : ?>
+                                    <a href=<?= "list.php?sort=fname&dir=1"?> class="acction">
+                                        <img src="./img/no-sort.svg" alt="money" width="20px">
+                                    </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'fname' && $sortdir == 0 ) : ?>
+                                        <a href=<?= "list.php?sort=fname&dir=1"?> class="acction">
+                                            <img src="./img/no-sort.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'fname' && $sortdir == 1 ) : ?>
+                                        <a href=<?= "list.php?sort=fname&dir=2"?> class="acction">
+                                            <img src="./img/sort-down.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'fname' && $sortdir == 2 ) : ?>
+                                        <a href=<?= "list.php?sort=fname&dir=0"?> class="acction">
+                                            <img src="./img/sort-up.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+                            </p>
+                            <p>Last Name
+                                <?php if($sorter != 'lname') : ?>
+                                    <a href=<?= "list.php?sort=lname&dir=1"?> class="acction">
+                                        <img src="./img/no-sort.svg" alt="money" width="20px">
+                                    </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'lname' && $sortdir == 0 ) : ?>
+                                        <a href=<?= "list.php?sort=lname&dir=1"?> class="acction">
+                                            <img src="./img/no-sort.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'lname' && $sortdir == 1 ) : ?>
+                                        <a href=<?= "list.php?sort=lname&dir=2"?> class="acction">
+                                            <img src="./img/sort-down.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'lname' && $sortdir == 2 ) : ?>
+                                        <a href=<?= "list.php?sort=lname&dir=0"?> class="acction">
+                                            <img src="./img/sort-up.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                            </p>
+                            <p>Personal ID
+                                <?php if($sorter != 'pid') : ?>
+                                    <a href=<?= "list.php?sort=pid&dir=1"?> class="acction">
+                                        <img src="./img/no-sort.svg" alt="money" width="20px">
+                                    </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'pid' && $sortdir == 0 ) : ?>
+                                        <a href=<?= "list.php?sort=pid&dir=1"?> class="acction">
+                                            <img src="./img/no-sort.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'pid' && $sortdir == 1 ) : ?>
+                                        <a href=<?= "list.php?sort=pid&dir=2"?> class="acction">
+                                            <img src="./img/sort-down.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'pid' && $sortdir == 2 ) : ?>
+                                        <a href=<?= "list.php?sort=pid&dir=0"?> class="acction">
+                                            <img src="./img/sort-up.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                            </p>
+                            <p>IBAN
+                                <?php if($sorter != 'iban') : ?>
+                                    <a href=<?= "list.php?sort=iban&dir=1"?> class="acction">
+                                        <img src="./img/no-sort.svg" alt="money" width="20px">
+                                    </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'iban' && $sortdir == 0 ) : ?>
+                                        <a href=<?= "list.php?sort=iban&dir=1"?> class="acction">
+                                            <img src="./img/no-sort.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'iban' && $sortdir == 1 ) : ?>
+                                        <a href=<?= "list.php?sort=iban&dir=2"?> class="acction">
+                                            <img src="./img/sort-down.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'iban' && $sortdir == 2 ) : ?>
+                                        <a href=<?= "list.php?sort=iban&dir=0"?> class="acction">
+                                            <img src="./img/sort-up.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+                            </p>
+                            <p>Balance
+                                <?php if($sorter != 'balance') : ?>
+                                    <a href=<?= "list.php?sort=balance&dir=1"?> class="acction">
+                                        <img src="./img/no-sort.svg" alt="money" width="20px">
+                                    </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'balance' && $sortdir == 0 ) : ?>
+                                        <a href=<?= "list.php?sort=balance&dir=1"?> class="acction">
+                                            <img src="./img/no-sort.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'balance' && $sortdir == 1 ) : ?>
+                                        <a href=<?= "list.php?sort=balance&dir=2"?> class="acction">
+                                            <img src="./img/sort-down.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                                <?php if($sorter == 'balance' && $sortdir == 2 ) : ?>
+                                        <a href=<?= "list.php?sort=balance&dir=0"?> class="acction">
+                                            <img src="./img/sort-up.svg" alt="money" width="20px">
+                                        </a>
+                                <?php endif ?>
+
+                            </p>
                             <p>Actions</p>
                 </li>
             </ul>   
@@ -49,7 +210,15 @@
                         <p><?= $a['pid']?></p>
                         <p><?= $a['iban']?></p>
                         <p><?= $balance?></p>
-                        <p><a href=<?= "edit.php?id=".$a['id']?> class="acction"><span style="color:green;">+</span> € <span style="color:red;">-</span></a> / <a href=<?= "delete.php?id=".$a['id']?> class="acction">DELETE</a></p>
+                        <p> 
+                            <a href=<?= "edit.php?id=".$a['id']?> class="acction">
+                                <img src="./img/money.svg" alt="money" width="30px">                            
+                            </a>
+                            <span>   </span>  
+                            <a href=<?= "delete.php?id=".$a['id']?> class="acction">
+                                <img src="./img/delete.svg" alt="delete" width="30px">
+                            </a>
+                        </p>
                     </li>
                 <?php endforeach ?>
             </ul>

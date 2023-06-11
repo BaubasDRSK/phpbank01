@@ -56,7 +56,7 @@
                             <label for="amount">Amount:</label>
                             <input  type="text" name="amount"  value=<?=($balance/100)?> required>
                         </div>
-                        <p class="info">Balance is not empty, do you want to withdraw all??</p>
+                        <p class="info note">Balance is not empty, do you want to withdraw all??</p>
                         <button class="btn-red" type="submit" name="minus" value=<?=$id?>>Widthraw all</button>
                         <a href="list.php" class="btn-blue" >CANCEL</a>
                     </form>
@@ -67,7 +67,7 @@
                         <p class="info">User: <?=$fname." ".$lname?></p>
                         <p class="info">IBAN: <?=$iban?></p>
                         <p class="info">Actual balance: <?=$balance_curency?></p>
-                        <p class="info">Balance is 0, you can delete account. Are you sure?</p>
+                        <p class="info note">Balance is 0, you can delete account. Are you sure?</p>
                         <button type="submit" class="btn-red" name="id" value=<?=$id?>>OK DELETE</button>
                         <a href="list.php" class="btn-blue" >CANCEL</a>
                     </form>
