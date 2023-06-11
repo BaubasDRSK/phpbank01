@@ -246,3 +246,19 @@ a.acction:hover{
     align-items: center;
     gap: 10px;
 }
+
+/* modal */
+
+dialog {
+    border: none;
+    min-width: 400px;
+    box-shadow: 0px 5px 20px #727272;
+}
+
+dialog form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #a1aebe;
+    padding: 30px;
+}

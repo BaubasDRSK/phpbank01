@@ -22,6 +22,15 @@
             return strnatcmp($a[$sorter], $b[$sorter]);
         });
     }
+
+    $srchLink = '<a href="#" id="search">Search</a>';
+    
+    if (isset($_GET['search'])){
+        $srchLink = '<a href="list.php">Reset search</a>';
+        $search = $_GET["search"];
+        $srchStr = $_GET['sStr'];
+        $accounts = array_filter($accounts, fn($a)=>str_contains(strtolower($a[$search]), strtolower($srchStr))); //strtolower(string $string): string
+    }
    
 ?>
 <!DOCTYPE html>
@@ -223,6 +232,39 @@
                 <?php endforeach ?>
             </ul>
         </div>
+        <dialog id="modal">
+            <form action="./list.php" method="get">
+                    <h2>Select field to search in :</h2>
+                    <div>
+                        <input type="radio" id="searchChoice1" name="search" value="lname" checked/>
+                        <label for="searchChoice1">Last Name</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="searchChoice2" name="search" value="pid" />
+                        <label for="searchChoice2">Personal ID</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="searchChoice3" name="search" value="iban" />
+                        <label for="searchChoice3">IBAN</label>
+                    </div>
+
+                    <div>
+                        <label for="searchString">Search for:</label>
+                        <input type="text" id="searchString" name="sStr" required/>
+                    </div>
+                <button type="submit">SEARCH</button>
+            </form>
+        </dialog>
     </main>
+    <script>
+        function modalOpen(){
+            modal= document.getElementById('modal');
+            modal.show();
+        }
+        const linkas = document.getElementById('search');
+        linkas.addEventListener("click", modalOpen);
+    </script>
 </body>
 </html>
